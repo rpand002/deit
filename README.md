@@ -98,3 +98,17 @@ This repository is released under the Apache 2.0 license as found in the [LICENS
 
 # Contributing
 We actively welcome your pull requests! Please see [CONTRIBUTING.md](.github/CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md) for more info.
+
+# Usage in AiMOS
+
+Follow these instructions for running DeiT in the AiMOS server.
+
+## Single Node Job
+```
+python train.py --model deit_base_patch16_224 --batch-size 128 --data-path /gpfs/u/home/LAVT/LAVTpndr/scratch-shared/datasets/image_cls/imagenet1k --multiprocessing-distributed --dist-eval --model-ema --output_dir ./output_neurips1/ --epoch 100 --dist_url tcp://dcs160:15908
+```
+
+## Multi Node Job
+```
+submit_job_aimos.py -n 2 -d 1 --job_name testing --wd /gpfs/u/home/LAVT/LAVTpndr/scratch/deit/ "python train.py --model deit_base_patch16_224 --batch-size 128 --data-path /gpfs/u/home/LAVT/LAVTpndr/scratch-shared/datasets/image_cls/imagenet1k --multiprocessing-distributed --dist-eval --model-ema --output_dir ./output_neurips/ --epoch 100 --multi_node"
+```
